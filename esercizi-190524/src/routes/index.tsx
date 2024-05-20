@@ -1,10 +1,20 @@
-import { component$, useSignal, $ } from "@builder.io/qwik";
+import { component$, useSignal, $, useStore } from "@builder.io/qwik";
 
 
 export default component$(() => {
 
-  return <SecondaProva />
+  return <QuartaProva />
 });
+
+export const QuartaProva = component$(() => {
+  const state = useStore({ name: 'Qwik' })
+  return (
+    <>
+      <input type="text" value={state.name} onInput$={(_, el) => state.name = el.value} />
+      <p>{state.name}</p>
+    </>
+  )
+})
 
 export enum ButtonType {
   PRIMARY, SECONDARY
@@ -60,13 +70,14 @@ export const PrimaProva = component$(() => {
 })
 
 export const SecondaProva = component$(() => {
-  
+
   const n = useSignal(0)
 
   const incrementa = $(() => n.value++)
   const decrementa = $(() => {
     if (n.value !== 0) n.value--
   })
+  const dice = $(() => n.value = Math.floor(Math.random() * 6) + 1)
 
   return (
     <>
@@ -75,10 +86,10 @@ export const SecondaProva = component$(() => {
         <div class="bg-fuchsia-500 h-[150px] flex flex-col items-center justify-between py-2 text-zinc-800">
           <span class="text-6xl text-indigo-800">{n}</span>
           <div class="flex gap-3 items-baseline">
-            <div class="w-fit" onClick$={decrementa}><Button type={ButtonType.SECONDARY} value="Decrementa"  /></div>
-            <div class="w-fit" onClick$={incrementa}><Button type={ButtonType.PRIMARY} value="Incrementa"  /></div>
+            <div class="w-fit" onClick$={decrementa}><Button type={ButtonType.SECONDARY} value="Decrementa" /></div>
+            <div class="w-fit" onClick$={incrementa}><Button type={ButtonType.PRIMARY} value="Incrementa" /></div>
             <a class="no-underline text-indigo-700 hover:underline" href="#"
-             preventdefault:click onC>Tira i dadi</a>
+              preventdefault:click onClick$={dice}>Tira i dadi</a>
           </div>
 
         </div>
@@ -87,3 +98,5 @@ export const SecondaProva = component$(() => {
   )
 
 })
+
+

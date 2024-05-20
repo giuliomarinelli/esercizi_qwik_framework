@@ -21,9 +21,12 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <RouterHead />
       </head>
-      <body lang="en" class="min-h-screen">
+      <body lang="en" class="min-h-screen dark:bg-gray-900">
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
